@@ -2,7 +2,7 @@ import React from 'react';
 import "./App.css"
 import Counter from './container/Counter'
 import Password from './container/Password';
-import countryDropdown from './container/countryDropdown'
+import Country from './container/Country'
 
 function App(props) {
   return (
@@ -12,7 +12,7 @@ function App(props) {
 
       {/* <Password /> */}
 
-      <countryDropdown />
+      <Country />
     </div>
   );
 }

@@ -21,7 +21,7 @@ function Counter(props) {
     <div>
       <button onClick={() =>setCount((count) => count - 1)} disabled={count===0}>-</button>
       {count}
-      <button onClick={() => inc()} disabled={count===5}>+</button>
+      <button onClick={() => inc()} disabled={count === 5 }>+</button>
     </div>
   );
 }
