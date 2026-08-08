@@ -1,18 +1,35 @@
-import React from 'react';
-import "./App.css"
-import Counter from './container/Counter'
-import Password from './container/Password';
-import Country from './container/Country'
+import React from "react";
+import "./App.css";
+import Counter from "./container/Counter";
+import Password from "./container/Password";
+import Country from "./container/Country";
+import CountryClass from "./container/CountryClass";
+import PasswordClass from "./container/PasswordClass";
+import Course from "./container/Course";
+import CourseClass from "./container/CourseClass";
+import TimerClass from "./container/TimerClass";
 
 function App(props) {
   return (
     // jsx
     <div>
-      {/* <Counter /> */}
+      {/* <Counter />
+    
+    <br></br> */}
+
+      {/* <Country /> */}
+      {/* <CountryClass /> */}
+
+      <br></br>
 
       {/* <Password /> */}
 
-      <Country />
+      {/* <PasswordClass /> */}
+
+      {/* <Course /> */}
+      {/* <CourseClass /> */}
+
+      <TimerClass />
     </div>
   );
 }
