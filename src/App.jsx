@@ -8,6 +8,7 @@ import PasswordClass from "./container/PasswordClass";
 import Course from "./container/Course";
 import CourseClass from "./container/CourseClass";
 import TimerClass from "./container/TimerClass";
+import Timer from "./container/Timer";
 
 function App(props) {
   return (
@@ -29,7 +30,8 @@ function App(props) {
       {/* <Course /> */}
       {/* <CourseClass /> */}
 
-      <TimerClass />
+      {/* <TimerClass /> */}
+      <Timer/>
     </div>
   );
 }
