@@ -4,32 +4,30 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Spinner from "react-bootstrap/Spinner";
 import Form from "react-bootstrap/Form";
-import ToggleButton from 'react-bootstrap/ToggleButton';
-import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
+import ToggleButton from "react-bootstrap/ToggleButton";
+import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 
 function Products(props) {
   const [p, setP] = useState([]);
   const [search, setSearch] = useState("");
   const [d, setD] = useState("");
-  const [cate, setCate] = useState([])
-
+  const [cate, setCate] = useState([]);
+  const [slcCat, setSlcCat] = useState("");
   const fetchData = async () => {
     const res = await fetch("https://fakestoreapi.com/products");
     const data = await res.json();
 
     console.log(data);
 
-    let uc = []
+    let uc = [];
 
     data.map((v) => {
-        if (!uc.includes(v.category)) {
-            uc.push(v.category)
-        }
-    })
-    setCate(uc)
+      if (!uc.includes(v.category)) {
+        uc.push(v.category);
+      }
+    });
+    setCate(uc);
     setP(data);
-
-    
   };
 
   useEffect(() => {
@@ -50,20 +48,21 @@ function Products(props) {
     console.log(d, fData);
 
     if (d === "hl") {
-      fData = fData.sort((a,b) => b.price - a.price);
-    //   console.log('high');
-      
+      fData = fData.sort((a, b) => b.price - a.price);
+      //   console.log('high');
     } else if (d === "lh") {
       fData = fData.toSorted((a, b) => a.price - b.price);
     } else if (d === "az") {
       fData = fData.toSorted((a, b) => a.title.localeCompare(b.title));
     } else if (d === "za") {
       fData = fData.toSorted((a, b) => b.title.localeCompare(a.title));
-    } 
+    }
     return fData;
+
+    //use filter for cate releted data
   };
   let finalData = handleFilter();
-    console.log(cate);
+  console.log(cate);
 
   return (
     <section>
@@ -94,16 +93,13 @@ function Products(props) {
           </div>
         </div>
         <div>
-             <ToggleButtonGroup type="radio" name="options" defaultValue={1}>
-        {
-            cate.map((v ) => (
-                <ToggleButton id="tbg-radio-1" value={1}>
-         {v}
-        </ToggleButton>
-            ))
-        }
-        
-      </ToggleButtonGroup>
+          <ToggleButtonGroup type="radio" name="options" defaultValue={1}>
+            {cate.map((v) => (
+              <ToggleButton id="tbg-radio-1" value={1}>
+                {v}
+              </ToggleButton>
+            ))}
+          </ToggleButtonGroup>
         </div>
         <div className="row" style={{ rowGap: "30px" }}>
           {p.length === 0 ? (
