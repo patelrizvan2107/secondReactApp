@@ -9,6 +9,7 @@ import Course from "./container/Course";
 import CourseClass from "./container/CourseClass";
 import TimerClass from "./container/TimerClass";
 import Timer from "./container/Timer";
+import Products from "./container/Products";
 
 function App(props) {
   return (
@@ -31,7 +32,9 @@ function App(props) {
       {/* <CourseClass /> */}
 
       {/* <TimerClass /> */}
-      <Timer/>
+      {/* <Timer/> */}
+
+      <Products />
     </div>
   );
 }
