@@ -36,6 +36,7 @@ function Products(props) {
 
   const handleFilter = () => {
     console.log(search);
+    console.log(slcCat);
     let fData = [];
 
     fData = p.filter(
@@ -93,9 +94,9 @@ function Products(props) {
           </div>
         </div>
         <div>
-          <ToggleButtonGroup type="radio" name="options" defaultValue={1}>
-            {cate.map((v) => (
-              <ToggleButton id="tbg-radio-1" value={1}>
+          <ToggleButtonGroup type="radio" name="options" defaultValue={1} >
+            {cate.map((v,i) => (
+              <ToggleButton id={`tbg-radio-${i}`} value={i + 1} onClick={(e) => setSlcCat(e.target.value)}>
                 {v}
               </ToggleButton>
             ))}
