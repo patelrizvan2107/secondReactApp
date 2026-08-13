@@ -10,11 +10,19 @@ import CourseClass from "./container/CourseClass";
 import TimerClass from "./container/TimerClass";
 import Timer from "./container/Timer";
 import Products from "./container/Products";
-
+import Header from "./components/Header";
+import { Route, Routes } from "react-router";
 function App(props) {
   return (
     // jsx
     <div>
+      <Header />
+      <Routes>
+        <Route path="/c" element={<Country />} />
+        <Route path="/p/:id" element={<Products />} />
+        <Route path="/t" element={<Timer />} />
+      </Routes>
+
       {/* <Counter />
     
     <br></br> */}
@@ -34,7 +42,7 @@ function App(props) {
       {/* <TimerClass /> */}
       {/* <Timer/> */}
 
-      <Products />
+      {/* <Products /> */}
     </div>
   );
 }
