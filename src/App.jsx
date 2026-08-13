@@ -11,17 +11,18 @@ import TimerClass from "./container/TimerClass";
 import Timer from "./container/Timer";
 import Products from "./container/Products";
 import Header from "./components/Header";
-import { Route, Routes } from "react-router";
+// import { BrowserRouter } from "react-router-dom";
+import EmpData from "./container/EmpData";
 function App(props) {
   return (
     // jsx
     <div>
-      <Header />
+      {/* <Header />
       <Routes>
         <Route path="/c" element={<Country />} />
         <Route path="/p/:id" element={<Products />} />
         <Route path="/t" element={<Timer />} />
-      </Routes>
+      </Routes> */}
 
       {/* <Counter />
     
@@ -43,6 +44,8 @@ function App(props) {
       {/* <Timer/> */}
 
       {/* <Products /> */}
+
+      <EmpData />
     </div>
   );
 }
