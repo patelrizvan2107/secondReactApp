@@ -73,6 +73,8 @@ function Products(props) {
   };
 
   let finalData = handleFilter();
+
+  
   console.log(cate);
   let perPage = 5;
   let page = Math.ceil(finalData.length / perPage)

@@ -13,16 +13,18 @@ import Products from "./container/Products";
 import Header from "./components/Header";
 // import { BrowserRouter } from "react-router-dom";
 import EmpData from "./container/EmpData";
+import { Routes,Route } from "react-router";
 function App(props) {
   return (
     // jsx
     <div>
-      {/* <Header />
+      <Header />
       <Routes>
         <Route path="/c" element={<Country />} />
         <Route path="/p/:id" element={<Products />} />
         <Route path="/t" element={<Timer />} />
-      </Routes> */}
+        <Route path="/Emp" element = { <EmpData />}/>
+      </Routes>
 
       {/* <Counter />
     
@@ -45,7 +47,7 @@ function App(props) {
 
       {/* <Products /> */}
 
-      <EmpData />
+      {/* <EmpData /> */}
     </div>
   );
 }
