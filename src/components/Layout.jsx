@@ -16,7 +16,6 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import Autocomplete from "@mui/material/Autocomplete";
-import top100Films from "./top100Films";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -32,13 +31,11 @@ import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import NavigationIcon from "@mui/icons-material/Navigation";
-import NumberField from "../components/NumberField.jsx";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
-import FormHelperText from "@mui/material/FormHelperText";
 import Rating from "@mui/material/Rating";
 import Typography from "@mui/material/Typography";
 import Select from "@mui/material/Select";
@@ -46,11 +43,9 @@ import Slider from "@mui/material/Slider";
 import VolumeDown from "@mui/icons-material/VolumeDown";
 import VolumeUp from "@mui/icons-material/VolumeUp";
 import InputLabel from "@mui/material/InputLabel";
-import PropTypes from "prop-types";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import MenuItem from "@mui/material/MenuItem";
-import MenuList from "@mui/material/MenuList";
 import FormatBoldIcon from "@mui/icons-material/FormatBold";
 import FormatItalicIcon from "@mui/icons-material/FormatItalic";
 import FormatUnderlinedIcon from "@mui/icons-material/FormatUnderlined";
@@ -67,51 +62,86 @@ import Badge from "@mui/material/Badge";
 import MailIcon from "@mui/icons-material/Mail";
 import Chip from "@mui/material/Chip";
 import Card from "@mui/material/Card";
-
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
 import List from "@mui/material/List";
 import ImageIcon from "@mui/icons-material/Image";
 import WorkIcon from "@mui/icons-material/Work";
 import BeachAccessIcon from "@mui/icons-material/BeachAccess";
+import { DataGrid } from "@mui/x-data-grid";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Switch from "@mui/material/Switch";
+import TextField from "@mui/material/TextField";
+
+// Additional MUI Component Imports
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+import AvatarGroup from "@mui/material/AvatarGroup";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import RestoreIcon from "@mui/icons-material/Restore";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import Link from "@mui/material/Link";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogActions from "@mui/material/DialogActions";
+import LinearProgress from "@mui/material/LinearProgress";
+import Menu from "@mui/material/Menu";
+import Pagination from "@mui/material/Pagination";
+import Popover from "@mui/material/Popover";
+import Skeleton from "@mui/material/Skeleton";
+import Snackbar from "@mui/material/Snackbar";
+import SpeedDial from "@mui/material/SpeedDial";
+import SpeedDialIcon from "@mui/material/SpeedDialIcon";
+import SpeedDialAction from "@mui/material/SpeedDialAction";
+import CopyIcon from "@mui/icons-material/FileCopy";
+import SaveIcon from "@mui/icons-material/Save";
+import PrintIcon from "@mui/icons-material/Print";
+import ShareIcon from "@mui/icons-material/Share";
+import Stepper from "@mui/material/Stepper";
+import Step from "@mui/material/Step";
+import StepLabel from "@mui/material/StepLabel";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Tooltip from "@mui/material/Tooltip";
+import Container from "@mui/material/Container";
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+
+const top100Films = [
+  { label: "The Shawshank Redemption", year: 1994 },
+  { label: "The Godfather", year: 1972 },
+];
+
 const columns = [
   { field: "id", headerName: "ID", width: 70 },
   { field: "firstName", headerName: "First name", width: 130 },
   { field: "lastName", headerName: "Last name", width: 130 },
-  {
-    field: "age",
-    headerName: "Age",
-    type: "number",
-    width: 90,
-  },
-  {
-    field: "fullName",
-    headerName: "Full name",
-    description: "This column has a value getter and is not sortable.",
-    sortable: false,
-    width: 160,
-    valueGetter: (value, row) => `${row.firstName || ""} ${row.lastName || ""}`,
-  },
+  { field: "age", headerName: "Age", type: "number", width: 90 },
 ];
 
 const rows = [
   { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
   { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-  { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-  { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-  { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
 ];
 
-const paginationModel = { page: 0, pageSize: 5 };
-import { DataGrid } from "@mui/x-data-grid";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-const label = { slotProps: { input: { "aria-label": "Checkbox demo" } } };
-import Switch from "@mui/material/Switch";
 const drawerWidth = 240;
-import TextField from "@mui/material/TextField";
-const label2 = { slotProps: { input: { "aria-label": "Switch demo" } } };
+
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create("width", {
@@ -138,7 +168,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   alignItems: "center",
   justifyContent: "flex-end",
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
 
@@ -191,35 +220,25 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function Layout() {
-  const handleDelete = () => {
-    console.info("You clicked the delete icon.");
-  };
-
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
   const [formats, setFormats] = React.useState(() => ["bold", "italic"]);
   const [value, setValue] = React.useState(2);
   const [age, setAge] = React.useState("");
-  const handleFormat = (event, newFormats) => {
-    setFormats(newFormats);
-  };
+  const [sliderVal, setSliderVal] = React.useState(30);
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
-  const [value2, setValue2] = React.useState(30);
+  // States for interactive examples
+  const [bottomNavVal, setBottomNavVal] = React.useState(0);
+  const [dialogOpen, setDialogOpen] = React.useState(false);
+  const [anchorElMenu, setAnchorElMenu] = React.useState(null);
+  const [anchorElPopover, setAnchorElPopover] = React.useState(null);
+  const [snackbarOpen, setSnackbarOpen] = React.useState(false);
+  const [backdropOpen, setBackdropOpen] = React.useState(false);
+  const [tabVal, setTabVal] = React.useState(0);
 
-  const handleChange2 = (event, newValue) => {
-    setValue2(newValue);
-  };
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+  const handleDelete = () => console.info("Clicked delete");
+  const handleDrawerOpen = () => setOpen(true);
+  const handleDrawerClose = () => setOpen(false);
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -231,28 +250,20 @@ export default function Layout() {
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            sx={[
-              {
-                marginRight: 5,
-              },
-              open && { display: "none" },
-            ]}
+            sx={[{ marginRight: 5 }, open && { display: "none" }]}
           >
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Mini variant drawer
+            MUI Components Library Demonstration
           </Typography>
         </Toolbar>
       </AppBar>
+
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "rtl" ? (
-              <ChevronRightIcon />
-            ) : (
-              <ChevronLeftIcon />
-            )}
+            {theme.direction === "rtl" ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
         <Divider />
@@ -261,107 +272,29 @@ export default function Layout() {
             <ListItem key={text} disablePadding sx={{ display: "block" }}>
               <ListItemButton
                 sx={[
-                  {
-                    minHeight: 48,
-                    px: 2.5,
-                  },
-                  open
-                    ? {
-                        justifyContent: "initial",
-                      }
-                    : {
-                        justifyContent: "center",
-                      },
+                  { minHeight: 48, px: 2.5 },
+                  open ? { justifyContent: "initial" } : { justifyContent: "center" },
                 ]}
               >
                 <ListItemIcon
                   sx={[
-                    {
-                      minWidth: 0,
-                      justifyContent: "center",
-                    },
-                    open
-                      ? {
-                          mr: 3,
-                        }
-                      : {
-                          mr: "auto",
-                        },
+                    { minWidth: 0, justifyContent: "center" },
+                    open ? { mr: 3 } : { mr: "auto" },
                   ]}
                 >
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                 </ListItemIcon>
-                <ListItemText
-                  primary={text}
-                  sx={[
-                    open
-                      ? {
-                          opacity: 1,
-                        }
-                      : {
-                          opacity: 0,
-                        },
-                  ]}
-                />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={[
-                  {
-                    minHeight: 48,
-                    px: 2.5,
-                  },
-                  open
-                    ? {
-                        justifyContent: "initial",
-                      }
-                    : {
-                        justifyContent: "center",
-                      },
-                ]}
-              >
-                <ListItemIcon
-                  sx={[
-                    {
-                      minWidth: 0,
-                      justifyContent: "center",
-                    },
-                    open
-                      ? {
-                          mr: 3,
-                        }
-                      : {
-                          mr: "auto",
-                        },
-                  ]}
-                >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText
-                  primary={text}
-                  sx={[
-                    open
-                      ? {
-                          opacity: 1,
-                        }
-                      : {
-                          opacity: 0,
-                        },
-                  ]}
-                />
+                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
       </Drawer>
+
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
+
+        <h2>Inputs</h2>
         <h5>Autocomplete</h5>
         <Autocomplete
           disablePortal
@@ -373,525 +306,343 @@ export default function Layout() {
         <h5>Button</h5>
         <Stack direction="row" spacing={2}>
           <Button variant="contained">Contained</Button>
-          <Button variant="contained" disabled>
-            Disabled
-          </Button>
-          <Button variant="contained" href="#contained-buttons">
-            Link
-          </Button>
-          <Button variant="outlined" startIcon={<DeleteIcon />}>
-            Delete
-          </Button>
-          <Button variant="contained" endIcon={<SendIcon />}>
-            Send
-          </Button>
+          <Button variant="outlined" startIcon={<DeleteIcon />}>Delete</Button>
+          <Button variant="contained" endIcon={<SendIcon />}>Send</Button>
         </Stack>
-        <h5>Button-group</h5>
+
+        <h5>Button Group</h5>
         <ButtonGroup variant="contained" aria-label="Basic button group">
           <Button>One</Button>
           <Button>Two</Button>
           <Button>Three</Button>
         </ButtonGroup>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            "& > *": {
-              m: 1,
-            },
-          }}
-        >
-          <ButtonGroup variant="outlined" aria-label="Basic button group">
-            <Button>One</Button>
-            <Button>Two</Button>
-            <Button>Three</Button>
-          </ButtonGroup>
-          <ButtonGroup variant="text" aria-label="Basic button group">
-            <Button>One</Button>
-            <Button>Two</Button>
-            <Button>Three</Button>
-          </ButtonGroup>
-        </Box>
-        <h5>Check box</h5>
+
+        <h5>Checkbox</h5>
         <div>
-          <Checkbox {...label} defaultChecked />
-          <Checkbox {...label} />
-          <Checkbox {...label} disabled />
-          <Checkbox {...label} disabled checked />
+          <Checkbox defaultChecked />
+          <Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+          <Checkbox icon={<BookmarkBorderIcon />} checkedIcon={<BookmarkIcon />} />
         </div>
-        <div>
-          <Checkbox
-            {...label}
-            icon={<FavoriteBorder />}
-            checkedIcon={<Favorite />}
-          />
-          <Checkbox
-            {...label}
-            icon={<BookmarkBorderIcon />}
-            checkedIcon={<BookmarkIcon />}
-          />
-        </div>
-        <h5>Floating Action button</h5>
+
+        <h5>Floating Action Button (Fab)</h5>
         <Box sx={{ "& > :not(style)": { m: 1 } }}>
-          <Fab color="primary" aria-label="add">
-            <AddIcon />
-          </Fab>
-          <Fab color="secondary" aria-label="edit">
-            <EditIcon />
-          </Fab>
-          <Fab variant="extended">
-            <NavigationIcon sx={{ mr: 1 }} />
-            Navigate
-          </Fab>
-          <Fab aria-label="like">
-            <FavoriteIcon />
-          </Fab>
-        </Box>
-        <h5>Number Field</h5>
-        <Box sx={{ display: "grid", gap: 4 }}>
-          <NumberField label="Number Field" min={10} max={40} />
-          <NumberField label="Number Field (Small)" size="small" />
-          <NumberField
-            label="Number Field with Error"
-            min={10}
-            max={40}
-            defaultValue={100}
-            size="small"
-            error
-          />
+          <Fab color="primary"><AddIcon /></Fab>
+          <Fab color="secondary"><EditIcon /></Fab>
+          <Fab variant="extended"><NavigationIcon sx={{ mr: 1 }} />Navigate</Fab>
         </Box>
 
-        <h5>Radio group</h5>
+        <h5>Radio Group</h5>
         <FormControl>
-          <FormLabel id={`1-label`}>Gender</FormLabel>
-          <RadioGroup
-            row
-            aria-labelledby={`2-label`}
-            name="row-radio-buttons-group"
-          >
-            <FormControlLabel
-              value="female"
-              control={<Radio />}
-              label="Female"
-            />
+          <FormLabel>Gender</FormLabel>
+          <RadioGroup row name="gender-group">
+            <FormControlLabel value="female" control={<Radio />} label="Female" />
             <FormControlLabel value="male" control={<Radio />} label="Male" />
-            <FormControlLabel value="other" control={<Radio />} label="Other" />
-            <FormControlLabel
-              value="disabled"
-              disabled
-              control={<Radio />}
-              label="other"
-            />
           </RadioGroup>
         </FormControl>
+
         <h5>Rating</h5>
-        <Box sx={{ "& > legend": { mt: 2 } }}>
-          <Typography component="legend">Controlled</Typography>
-          <Rating
-            name="simple-controlled"
-            value={value}
-            onChange={(event, newValue) => {
-              setValue(newValue);
-            }}
-          ></Rating>
-        </Box>
+        <Rating value={value} onChange={(e, val) => setValue(val)} />
+
         <h5>Select</h5>
-        <div>
-          <FormControl variant="outlined" sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel id="demo-simple-select-outlined-label">Age</InputLabel>
-            <Select
-              labelId="demo-simple-select-outlined-label"
-              id="demo-simple-select-outlined"
-              value={age}
-              onChange={handleChange}
-              label="Age"
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-            </Select>
-          </FormControl>
-          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel id="demo-simple-select-standard-label">Age</InputLabel>
-            <Select
-              labelId="demo-simple-select-standard-label"
-              id="demo-simple-select-standard"
-              value={age}
-              onChange={handleChange}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-            </Select>
-          </FormControl>
-          <FormControl variant="filled" sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel id="demo-simple-select-filled-label">Age</InputLabel>
-            <Select
-              labelId="demo-simple-select-filled-label"
-              id="demo-simple-select-filled"
-              value={age}
-              onChange={handleChange}
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-            </Select>
-          </FormControl>
-        </div>
+        <FormControl sx={{ m: 1, minWidth: 120 }}>
+          <InputLabel>Age</InputLabel>
+          <Select value={age} label="Age" onChange={(e) => setAge(e.target.value)}>
+            <MenuItem value={10}>Ten</MenuItem>
+            <MenuItem value={20}>Twenty</MenuItem>
+          </Select>
+        </FormControl>
+
         <h5>Slider</h5>
         <Box sx={{ width: 200 }}>
-          <Stack
-            spacing={2}
-            direction="row"
-            sx={{ alignItems: "center", mb: 1 }}
-          >
+          <Stack spacing={2} direction="row" sx={{ alignItems: "center" }}>
             <VolumeDown />
-            <Slider
-              aria-label="Volume"
-              value={value2}
-              onChange={handleChange2}
-            />
+            <Slider value={sliderVal} onChange={(e, v) => setSliderVal(v)} />
             <VolumeUp />
-          </Stack>
-          <Slider disabled defaultValue={30} aria-label="Disabled slider" />
-        </Box>
-        <h5>Basic switches</h5>
-        <div>
-          <Switch {...label2} defaultChecked />
-          <Switch {...label2} />
-          <Switch {...label2} disabled defaultChecked />
-          <Switch {...label2} disabled />
-        </div>
-        <h5>Basic TextField</h5>
-        <Box
-          component="form"
-          sx={{ "& .MuiTextField-root": { m: 1, width: "25ch" } }}
-          noValidate
-          autoComplete="off"
-        >
-          <div>
-            <TextField
-              required
-              id="outlined-required"
-              label="Required"
-              defaultValue="Hello World"
-            />
-            <TextField
-              disabled
-              id="outlined-disabled"
-              label="Disabled"
-              defaultValue="Hello World"
-            />
-            <TextField
-              id="outlined-password-input"
-              label="Password"
-              type="password"
-              autoComplete="current-password"
-            />
-            <TextField
-              id="outlined-read-only-input"
-              label="Read Only"
-              defaultValue="Hello World"
-              slotProps={{
-                input: {
-                  readOnly: true,
-                },
-              }}
-            />
-            <TextField
-              id="outlined-search"
-              label="Search field"
-              type="search"
-            />
-            <TextField
-              id="outlined-helperText"
-              label="Helper text"
-              defaultValue="Default Value"
-              helperText="Some important text"
-            />
-          </div>
-          <div>
-            <TextField
-              required
-              id="filled-required"
-              label="Required"
-              defaultValue="Hello World"
-              variant="filled"
-            />
-            <TextField
-              disabled
-              id="filled-disabled"
-              label="Disabled"
-              defaultValue="Hello World"
-              variant="filled"
-            />
-            <TextField
-              id="filled-password-input"
-              label="Password"
-              type="password"
-              autoComplete="current-password"
-              variant="filled"
-            />
-            <TextField
-              id="filled-read-only-input"
-              label="Read Only"
-              defaultValue="Hello World"
-              variant="filled"
-              slotProps={{
-                input: {
-                  readOnly: true,
-                },
-              }}
-            />
-            <TextField
-              id="filled-search"
-              label="Search field"
-              type="search"
-              variant="filled"
-            />
-            <TextField
-              id="filled-helperText"
-              label="Helper text"
-              defaultValue="Default Value"
-              helperText="Some important text"
-              variant="filled"
-            />
-          </div>
-          <div>
-            <TextField
-              required
-              id="standard-required"
-              label="Required"
-              defaultValue="Hello World"
-              variant="standard"
-            />
-            <TextField
-              disabled
-              id="standard-disabled"
-              label="Disabled"
-              defaultValue="Hello World"
-              variant="standard"
-            />
-            <TextField
-              id="standard-password-input"
-              label="Password"
-              type="password"
-              autoComplete="current-password"
-              variant="standard"
-            />
-            <TextField
-              id="standard-read-only-input"
-              label="Read Only"
-              defaultValue="Hello World"
-              variant="standard"
-              slotProps={{
-                input: {
-                  readOnly: true,
-                },
-              }}
-            />
-            <TextField
-              id="standard-search"
-              label="Search field"
-              type="search"
-              variant="standard"
-            />
-            <TextField
-              id="standard-helperText"
-              label="Helper text"
-              defaultValue="Default Value"
-              helperText="Some important text"
-              variant="standard"
-            />
-          </div>
-          <h5>Toggle Button</h5>
-          <ToggleButtonGroup
-            value={formats}
-            onChange={handleFormat}
-            aria-label="text formatting"
-          >
-            <ToggleButton value="bold" aria-label="bold">
-              <FormatBoldIcon />
-            </ToggleButton>
-            <ToggleButton value="italic" aria-label="italic">
-              <FormatItalicIcon />
-            </ToggleButton>
-            <ToggleButton value="underlined" aria-label="underlined">
-              <FormatUnderlinedIcon />
-            </ToggleButton>
-            <ToggleButton value="color" aria-label="color" disabled>
-              <FormatColorFillIcon />
-              <ArrowDropDownIcon />
-            </ToggleButton>
-          </ToggleButtonGroup>
-          <h2>Data Display</h2>
-          <h5>Avtar</h5>
-          <Stack direction="row" spacing={2}>
-            <Avatar>
-              <FolderIcon />
-            </Avatar>
-            <Avatar sx={{ bgcolor: pink[500] }}>
-              <PageviewIcon />
-            </Avatar>
-            <Avatar sx={{ bgcolor: green[500] }}>
-              <AssignmentIcon />
-            </Avatar>
           </Stack>
         </Box>
 
+        <h5>Switch</h5>
+        <Switch defaultChecked />
+
+        <h5>TextField</h5>
+        <TextField label="Outlined" variant="outlined" sx={{ mr: 2 }} />
+        <TextField label="Filled" variant="filled" sx={{ mr: 2 }} />
+        <TextField label="Standard" variant="standard" />
+
+        <h5>Toggle Button</h5>
+        <ToggleButtonGroup value={formats} onChange={(e, f) => setFormats(f)}>
+          <ToggleButton value="bold"><FormatBoldIcon /></ToggleButton>
+          <ToggleButton value="italic"><FormatItalicIcon /></ToggleButton>
+          <ToggleButton value="underlined"><FormatUnderlinedIcon /></ToggleButton>
+        </ToggleButtonGroup>
+
+        <Divider sx={{ my: 4 }} />
+        <h2>Data Display</h2>
+
+        <h5>Avatar & Avatar Group</h5>
+        <Stack direction="row" spacing={2} sx={{ mb: 2 }}>
+          <Avatar sx={{ bgcolor: pink[500] }}><PageviewIcon /></Avatar>
+          <AvatarGroup max={4}>
+            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+            <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
+            <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
+          </AvatarGroup>
+        </Stack>
+
         <h5>Badge</h5>
-        <IconButton aria-label="show 4 unread messages">
-          <Badge badgeContent={4} color="primary">
-            <MailIcon />
-          </Badge>
-        </IconButton>
+        <Badge badgeContent={4} color="primary">
+          <MailIcon />
+        </Badge>
+
         <h5>Chip</h5>
         <Stack direction="row" spacing={1}>
           <Chip label="Deletable" onDelete={handleDelete} />
-          <Chip label="Deletable" variant="outlined" onDelete={handleDelete} />
+          <Chip label="Outlined" variant="outlined" color="primary" />
         </Stack>
+
         <h5>Divider</h5>
-        <Card variant="outlined" sx={{ maxWidth: 360 }}>
-          <Box sx={{ p: 2 }}>
-            <Stack
-              direction="row"
-              sx={{ justifyContent: "space-between", alignItems: "center" }}
-            >
-              <Typography gutterBottom variant="h5" component="div">
-                Toothbrush
-              </Typography>
-              <Typography gutterBottom variant="h6" component="div">
-                $4.50
-              </Typography>
-            </Stack>
-            <Typography variant="body2" sx={{ color: "text.secondary" }}>
-              Pinstriped cornflower blue cotton blouse takes you on a walk to
-              the park or just down the hall.
-            </Typography>
-          </Box>
-          <Divider />
-          <Box sx={{ p: 2 }}>
-            <Typography gutterBottom variant="body2">
-              Select type
-            </Typography>
-            <Stack direction="row" spacing={1}>
-              <Chip color="primary" label="Soft" size="small" />
-              <Chip label="Medium" size="small" />
-              <Chip label="Hard" size="small" />
-            </Stack>
-          </Box>
-        </Card>
-        <Card variant="outlined" sx={{ maxWidth: 360 }}>
-          <Box sx={{ p: 2 }}>
-            <Stack
-              direction="row"
-              sx={{ justifyContent: "space-between", alignItems: "center" }}
-            >
-              <Typography gutterBottom variant="h5" component="div">
-                Toothbrush
-              </Typography>
-              <Typography gutterBottom variant="h6" component="div">
-                $4.50
-              </Typography>
-            </Stack>
-            <Typography variant="body2" sx={{ color: "text.secondary" }}>
-              Pinstriped cornflower blue cotton blouse takes you on a walk to
-              the park or just down the hall.
-            </Typography>
-          </Box>
-          <Divider />
-          <Box sx={{ p: 2 }}>
-            <Typography gutterBottom variant="body2">
-              Select type
-            </Typography>
-            <Stack direction="row" spacing={1}>
-              <Chip color="primary" label="Soft" size="small" />
-              <Chip label="Medium" size="small" />
-              <Chip label="Hard" size="small" />
-            </Stack>
-          </Box>
-        </Card>
-        <Card variant="outlined" sx={{ maxWidth: 360 }}>
-          <Box sx={{ p: 2 }}>
-            <Stack
-              direction="row"
-              sx={{ justifyContent: "space-between", alignItems: "center" }}
-            >
-              <Typography gutterBottom variant="h5" component="div">
-                Toothbrush
-              </Typography>
-              <Typography gutterBottom variant="h6" component="div">
-                $4.50
-              </Typography>
-            </Stack>
-            <Typography variant="body2" sx={{ color: "text.secondary" }}>
-              Pinstriped cornflower blue cotton blouse takes you on a walk to
-              the park or just down the hall.
-            </Typography>
-          </Box>
-          <Divider />
-          <Box sx={{ p: 2 }}>
-            <Typography gutterBottom variant="body2">
-              Select type
-            </Typography>
-            <Stack direction="row" spacing={1}>
-              <Chip color="primary" label="Soft" size="small" />
-              <Chip label="Medium" size="small" />
-              <Chip label="Hard" size="small" />
-            </Stack>
-          </Box>
-        </Card>
+        <Divider sx={{ my: 2 }} />
+
         <h5>List</h5>
-        <List
-          sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-        >
+        <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
           <ListItem>
-            <ListItemAvatar>
-              <Avatar>
-                <ImageIcon />
-              </Avatar>
-            </ListItemAvatar>
+            <ListItemAvatar><Avatar><ImageIcon /></Avatar></ListItemAvatar>
             <ListItemText primary="Photos" secondary="Jan 9, 2014" />
           </ListItem>
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar>
-                <WorkIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Work" secondary="Jan 7, 2014" />
-          </ListItem>
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar>
-                <BeachAccessIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Vacation" seco
-            ndary="July 20, 2014" />
-          </ListItem>
         </List>
-        <h5>Table</h5>
-        <Paper sx={{ height: 400, width: "100%" }}>
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            initialState={{ pagination: { paginationModel } }}
-            pageSizeOptions={[5, 10]}
-            checkboxSelection
-            sx={{ border: 0 }}
-          />
+
+        <h5>Table (Basic Standard)</h5>
+        <TableContainer component={Paper} sx={{ maxWidth: 400, mb: 2 }}>
+          <Table size="small">
+            <TableHead>
+              <TableRow>
+                <TableCell>Dessert</TableCell>
+                <TableCell align="right">Calories</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow>
+                <TableCell>Frozen yogurt</TableCell>
+                <TableCell align="right">159</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+
+        <h5>Data Grid</h5>
+        <Paper sx={{ height: 250, width: "100%", mb: 2 }}>
+          <DataGrid rows={rows} columns={columns} />
         </Paper>
+
+        <h5>Tooltip</h5>
+        <Tooltip title="Delete Item">
+          <IconButton><DeleteIcon /></IconButton>
+        </Tooltip>
+
+        <h5>Typography</h5>
+        <Typography variant="h4" gutterBottom>h4. Heading</Typography>
+
+        <Divider sx={{ my: 4 }} />
+        <h2>Feedback</h2>
+
+        <h5>Alert</h5>
+        <Alert severity="info" sx={{ mb: 2 }}>
+          <AlertTitle>Info</AlertTitle>
+          This is an info alert — check it out!
+        </Alert>
+
+        <h5>Backdrop</h5>
+        <Button variant="outlined" onClick={() => setBackdropOpen(true)}>Show Backdrop</Button>
+        <Backdrop
+          sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={backdropOpen}
+          onClick={() => setBackdropOpen(false)}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+
+        <h5>Dialog</h5>
+        <Button variant="outlined" onClick={() => setDialogOpen(true)}>Open Dialog</Button>
+        <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
+          <DialogTitle>Dialog Title</DialogTitle>
+          <DialogContent>
+            <DialogContentText>This is a standard Material UI modal dialog.</DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setDialogOpen(false)}>Close</Button>
+          </DialogActions>
+        </Dialog>
+
+        <h5>Progress (Circular & Linear)</h5>
+        <Box sx={{ width: "100%", my: 2 }}>
+          <CircularProgress sx={{ mr: 2 }} />
+          <Box sx={{ width: 200, display: "inline-block" }}>
+            <LinearProgress />
+          </Box>
+        </Box>
+
+        <h5>Skeleton</h5>
+        <Skeleton variant="rectangular" width={210} height={118} />
+
+        <h5>Snackbar</h5>
+        <Button onClick={() => setSnackbarOpen(true)}>Open Snackbar</Button>
+        <Snackbar
+          open={snackbarOpen}
+          autoHideDuration={3000}
+          onClose={() => setSnackbarOpen(false)}
+          message="Note archived"
+        />
+
+        <Divider sx={{ my: 4 }} />
+        <h2>Surfaces</h2>
+
+        <h5>Accordion</h5>
+        <Accordion sx={{ maxWidth: 400 }}>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography>Accordion 1</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Typography>
+          </AccordionDetails>
+        </Accordion>
+
+        <h5>Card</h5>
+        <Card sx={{ maxWidth: 275, my: 2 }}>
+          <CardContent>
+            <Typography variant="h5">Word of the Day</Typography>
+            <Typography color="text.secondary">be•nev•o•lent</Typography>
+          </CardContent>
+          <CardActions>
+            <Button size="small">Learn More</Button>
+          </CardActions>
+        </Card>
+
+        <h5>Paper</h5>
+        <Paper elevation={3} sx={{ p: 2, maxWidth: 300 }}>
+          <Typography>Paper surface with elevation.</Typography>
+        </Paper>
+
+        <Divider sx={{ my: 4 }} />
+        <h2>Navigation</h2>
+
+        <h5>Bottom Navigation</h5>
+        <Paper sx={{ maxWidth: 500, my: 2 }} elevation={3}>
+          <BottomNavigation
+            showLabels
+            value={bottomNavVal}
+            onChange={(e, val) => setBottomNavVal(val)}
+          >
+            <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
+            <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
+            <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+          </BottomNavigation>
+        </Paper>
+
+        <h5>Breadcrumbs</h5>
+        <Breadcrumbs aria-label="breadcrumb">
+          <Link underline="hover" color="inherit" href="#">MUI</Link>
+          <Link underline="hover" color="inherit" href="#">Core</Link>
+          <Typography color="text.primary">Breadcrumb</Typography>
+        </Breadcrumbs>
+
+        <h5>Menu</h5>
+        <Button onClick={(e) => setAnchorElMenu(e.currentTarget)}>Open Menu</Button>
+        <Menu
+          anchorEl={anchorElMenu}
+          open={Boolean(anchorElMenu)}
+          onClose={() => setAnchorElMenu(null)}
+        >
+          <MenuItem onClick={() => setAnchorElMenu(null)}>Profile</MenuItem>
+          <MenuItem onClick={() => setAnchorElMenu(null)}>My account</MenuItem>
+        </Menu>
+
+        <h5>Pagination</h5>
+        <Pagination count={10} color="primary" sx={{ my: 2 }} />
+
+        <h5>Popover</h5>
+        <Button variant="contained" onClick={(e) => setAnchorElPopover(e.currentTarget)}>
+          Open Popover
+        </Button>
+        <Popover
+          open={Boolean(anchorElPopover)}
+          anchorEl={anchorElPopover}
+          onClose={() => setAnchorElPopover(null)}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        >
+          <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
+        </Popover>
+
+        <h5>Speed Dial</h5>
+        <Box sx={{ height: 160, transform: 'translateZ(0px)', flexGrow: 1 }}>
+          <SpeedDial
+            ariaLabel="SpeedDial example"
+            sx={{ position: 'absolute', bottom: 16, right: 16 }}
+            icon={<SpeedDialIcon />}
+          >
+            <SpeedDialAction icon={<CopyIcon />} tooltipTitle="Copy" />
+            <SpeedDialAction icon={<SaveIcon />} tooltipTitle="Save" />
+            <SpeedDialAction icon={<PrintIcon />} tooltipTitle="Print" />
+            <SpeedDialAction icon={<ShareIcon />} tooltipTitle="Share" />
+          </SpeedDial>
+        </Box>
+
+        <h5>Stepper</h5>
+        <Box sx={{ width: '100%', my: 2 }}>
+          <Stepper activeStep={1}>
+            {['Select campaign', 'Create an ad group', 'Create an ad'].map((label) => (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+        </Box>
+
+        <h5>Tabs</h5>
+        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <Tabs value={tabVal} onChange={(e, val) => setTabVal(val)}>
+            <Tab label="Item One" />
+            <Tab label="Item Two" />
+            <Tab label="Item Three" />
+          </Tabs>
+        </Box>
+
+        <Divider sx={{ my: 4 }} />
+        <h2>Layout</h2>
+
+        <h5>Container</h5>
+        <Container maxWidth="sm" sx={{ bgcolor: '#cfe8fc', height: '50px', display: 'flex', alignItems: 'center' }}>
+          <Typography>Fixed-width centered container</Typography>
+        </Container>
+
+        <h5>Grid</h5>
+        <Grid container spacing={2} sx={{ my: 2 }}>
+          <Grid item xs={8}>
+            <Paper sx={{ p: 1, textAlign: 'center' }}>xs=8</Paper>
+          </Grid>
+          <Grid item xs={4}>
+            <Paper sx={{ p: 1, textAlign: 'center' }}>xs=4</Paper>
+          </Grid>
+        </Grid>
+
+        <h5>Image List</h5>
+        <ImageList sx={{ width: 300, height: 160 }} cols={3} rowHeight={100}>
+          <ImageListItem>
+            <img src="https://images.unsplash.com/photo-1551963831-b3b1ca40c98e?w=164&h=164&fit=crop&auto=format" alt="Breakfast" loading="lazy" />
+          </ImageListItem>
+          <ImageListItem>
+            <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=164&h=164&fit=crop&auto=format" alt="Burger" loading="lazy" />
+          </ImageListItem>
+          <ImageListItem>
+            <img src="https://images.unsplash.com/photo-1522770179533-24471fcdba45?w=164&h=164&fit=crop&auto=format" alt="Camera" loading="lazy" />
+          </ImageListItem>
+        </ImageList>
+
+        <h5>Stack</h5>
+        <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
+          <Paper sx={{ p: 1 }}>Item 1</Paper>
+          <Paper sx={{ p: 1 }}>Item 2</Paper>
+          <Paper sx={{ p: 1 }}>Item 3</Paper>
+        </Stack>
       </Box>
     </Box>
   );
