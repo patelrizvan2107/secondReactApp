@@ -14,18 +14,22 @@ import Header from "./components/Header";
 // import { BrowserRouter } from "react-router-dom";
 import EmpData from "./container/EmpData";
 import { Routes,Route } from "react-router";
+import Layout from "./components/Layout";
 function App(props) {
   return (
     // jsx
     <div>
-      <Header />
+      {/* <Header />
       <Routes>
         <Route path="/c" element={<Country />} />
         <Route path="/p/:id" element={<Products />} />
         <Route path="/t" element={<Timer />} />
         <Route path="/Emp" element = { <EmpData />}/>
-      </Routes>
+      </Routes> */}
 
+      <Layout>
+        
+      </Layout>
       {/* <Counter />
     
     <br></br> */}
