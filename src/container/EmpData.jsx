@@ -193,7 +193,7 @@ function EmpData() {
     return s;
   };
 
-  const fD = handleFilter();
+  let fD = handleFilter();
 
   const perPage = 2;
   let page = Math.ceil(fD.length / perPage)
@@ -203,7 +203,37 @@ function EmpData() {
       const sI = (cp - 1 ) * perPage;
       const lI = (sI - 1) + perPage
 
-      return fD.slice(sI, lI + 1)
+    //    fD = data.filter((v) => search.length < perPage ? v.name.toLowerCase().includes(search.toLowerCase()) :
+    //  null,
+    // );
+
+    // for (let index = 0; index < perPage; index++) {
+       
+    //     fD = fD.filter((v) => v.name.toLowerCase().includes(search.toLowerCase()));
+        
+    // }
+
+    console.log(fD);
+    let x = []
+
+//    if (fD) {
+
+//     for (let index = 0; index < perPage; index++) {
+//             x = fD.slice(sI, lI + 1).filter((v) => v.name.toLowerCase().includes(search.toLowerCase()))
+
+//         break;
+//     }
+
+//    } else {
+//     x = [...data]
+//    }
+
+
+ x = fD.slice(sI, lI + 1)
+ console.log(x);
+ 
+
+      return x
   }
   
   let pages = Paginationed ()
