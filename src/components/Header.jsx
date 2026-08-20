@@ -16,6 +16,8 @@ function Header(props) {
         <Nav.Link eventKey="link-1" href="/t">Timer</Nav.Link>
       </Nav.Item><Nav.Item>
         <Nav.Link eventKey="link-1" href="/Emp">EmpData</Nav.Link>
+      </Nav.Item><Nav.Item>
+        <Nav.Link eventKey="link-1" href="/learnyupformik">LearnYupFormik</Nav.Link>
       </Nav.Item>
     </Nav>
      

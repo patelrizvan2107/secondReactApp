@@ -15,21 +15,23 @@ import Header from "./components/Header";
 import EmpData from "./container/EmpData";
 import { Routes,Route } from "react-router";
 import Layout from "./components/Layout";
+import LearnYupFormik from "./container/LearnYupFormik/LearnYupFormik";
 function App(props) {
   return (
     // jsx
     <div>
-      {/* <Header />
+      <Header />
       <Routes>
         <Route path="/c" element={<Country />} />
         <Route path="/p/:id" element={<Products />} />
         <Route path="/t" element={<Timer />} />
         <Route path="/Emp" element = { <EmpData />}/>
-      </Routes> */}
+        <Route path="learnyupformik" element = {<LearnYupFormik />}></Route>
+      </Routes>
 
-      <Layout>
+      {/* <Layout>
         
-      </Layout>
+      </Layout> */}
       {/* <Counter />
     
     <br></br> */}
