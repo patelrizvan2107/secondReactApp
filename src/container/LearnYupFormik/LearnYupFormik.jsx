@@ -15,6 +15,23 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Checkbox from "@mui/material/Checkbox";
 import FormGroup from "@mui/material/FormGroup";
+import { styled } from "@mui/material/styles";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+
+const VisuallyHiddenInput = styled("input")({
+  clip: "rect(0 0 0 0)",
+  clipPath: "inset(50%)",
+  height: 1,
+  overflow: "hidden",
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  whiteSpace: "nowrap",
+  width: 1,
+});
 function LearnYupFormik(props) {
   const [open, setOpen] = React.useState(false);
 
@@ -73,60 +90,31 @@ function LearnYupFormik(props) {
       }),
     //   .min(10, "Atleast 10 Charecter")
     //   .max(100, "Only 100 Charecter Allowed."),
-    inputImg: string().required().test("inputImg", "Image only", (e,val) => {
-      //   console.log(val.length);
 
-      //   let arr = []
-      //   arr = val.split(".").toLowerCase();
-
-      //   console.log(arr,arr.length, arr[arr.length - 1]);
-
-
-      //   let imgType = ["jpg", "jpeg", "png", "webp"]
-      // console.log(!imgType.includes(arr[arr.length - 1].toLowerCase()));
-
-      //   if(val) {
-      //     if (!imgType.includes(arr[arr.length - 1])) {
-      //       return true
-      //   } else {
-      //       return false
-      //   }
-      //   } else {
-      //     return false
-      //   }
-
-    let file = e.target.files[0].
-      console.log("e", file.size);
-      console.log((val));
-      
-
- console.log( val.split(".").pop());
- const validExtensions = ["jpg", "jpeg", "png", "webp"];
-        const extension = val.split(".").pop();
-      if (!val) { return false } else {
-
-        if (!validExtensions.includes(extension)) {
-          return false;
-        } else   if(file.size > 1 * 1024 * 1024) {
-            return false;
-         } else {
-            return true;
-         }
-        
-        
-      };
-    }),
     gender: string().required("Select Gender"),
-    hobbies: array()
-      .test("hobbies", "Select Atleast two hobbies", (e,val) => {
+    hobbies: array().min(2, "Atleast two Hobbies"),
+    // .test("hobbies", "Select Atleast two hobbies", (e,val) => {
+    //   console.log(val);
+    //   console.log(e.target.value);
+    //   if (val.length >= 2) {
+    //     return true;
+    //   } else {
+    //     return false;
+    //   }
+    // }),
+    profile: array()
+      .test("profile", "Allowed only jpg, jpeg and png", (val) => {
         console.log(val);
-        console.log(e.target.value);
-        if (val.length >= 2) {
-          return true;
-        } else {
-          return false;
-        }
+
+        const alwdTyp = ["image/png", "image/jpg", "image/jpeg", "image/webpg"];
+        console.log(val.map((v) => console.log(v.type)));
+
+        return val.every((v) => alwdTyp.includes(v.type));
+      })
+      .test("prifile", "Image must be less than 2 mb ", (val) => {
+        return val.every((v) => v.size < 2 * 1024 * 1024);
       }),
+    country: string().required("Select Country"),
   });
 
   const formik = useFormik({
@@ -136,9 +124,11 @@ function LearnYupFormik(props) {
       number: "",
       bd: "",
       des: "",
-      inputImg: "",
+
       gender: "",
       hobbies: [],
+      profile: [],
+      country: "",
     },
     validationSchema: catSchema,
     onSubmit: (values) => {
@@ -146,8 +136,16 @@ function LearnYupFormik(props) {
     },
   });
 
-  const { handleBlur, handleSubmit, touched, values, errors, handleChange } =
-    formik;
+  const {
+    handleBlur,
+    handleSubmit,
+    touched,
+    values,
+    errors,
+    handleChange,
+    setFieldValue,
+    setFieldTouched,
+  } = formik;
 
   console.log(errors);
 
@@ -231,19 +229,7 @@ function LearnYupFormik(props) {
                 onBlur={handleBlur}
                 helperText={errors.des && touched.des ? errors.des : ""}
               />
-              <input
-                error={errors.inputImg && touched.inputImg}
-                name="inputImg"
-                type="file"
-                accept="image/*"
-                onChange={handleChange}
-                onBlur={handleBlur}
 
-              />
-
-              <span>{
-                errors.inputImg && touched.inputImg ? errors.inputImg : ""
-              }</span>
               <FormControl>
                 <FormLabel id={`gende-label`}>Gender</FormLabel>
                 <RadioGroup
@@ -253,7 +239,7 @@ function LearnYupFormik(props) {
                   name="gender"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                //   value={gender}
+                  //   value={gender}
                 >
                   <FormControlLabel
                     value="female"
@@ -274,30 +260,130 @@ function LearnYupFormik(props) {
                 <p>{errors.gender && touched.gender ? errors.gender : ""}</p>
               </FormControl>
               <h5>Hobbies</h5>
-              <FormGroup
-                error={errors.hobbies && touched.hobbies}
-                name="hobbies"
-                onChange={handleChange}
-                onBlur={handleBlur}
-
-
-              >
+              <FormGroup>
                 <FormControlLabel
-                  value={"Singing"}
-                  control={<Checkbox />}
+                  control={
+                    <Checkbox
+                      name="hobbies"
+                      value={"Singing"}
+                      checked={values.hobbies?.includes("Singing")}
+                      onChange={(e) => {
+                        const { checked, value } = e.target;
+                        console.log(checked);
+
+                        if (checked) {
+                          setFieldValue("hobbies", [...values?.hobbies, value]);
+                        } else {
+                          setFieldValue(
+                            "hobbies",
+                            values.hobbies?.filter((v) => v !== value),
+                          );
+                        }
+                      }}
+                    />
+                  }
                   label="Singing"
                 />
                 <FormControlLabel
-                  value={"Dancing"}
-                  control={<Checkbox />}
-                  label="Dancing"
+                  control={
+                    <Checkbox
+                      name="hobbies"
+                      value={"Coding"}
+                      checked={values.hobbies?.includes("Coding")}
+                      onChange={(e) => {
+                        const { checked, value } = e.target;
+                        console.log(checked);
+
+                        if (checked) {
+                          setFieldValue("hobbies", [...values?.hobbies, value]);
+                        } else {
+                          setFieldValue(
+                            "hobbies",
+                            values.hobbies?.filter((v) => v !== value),
+                          );
+                        }
+                      }}
+                    />
+                  }
+                  label="Coding"
                 />
                 <FormControlLabel
-                  value={"Reading"}
-                  control={<Checkbox />}
+                  control={
+                    <Checkbox
+                      name="hobbies"
+                      value={"Reading"}
+                      checked={values.hobbies?.includes("Reading")}
+                      onChange={(e) => {
+                        const { checked, value } = e.target;
+                        console.log(checked);
+
+                        if (checked) {
+                          setFieldValue("hobbies", [...values?.hobbies, value]);
+                        } else {
+                          setFieldValue(
+                            "hobbies",
+                            values.hobbies?.filter((v) => v !== value),
+                          );
+                        }
+                      }}
+                    />
+                  }
                   label="Reading"
                 />
               </FormGroup>
+              <p className="error">
+                {errors.hobbies && touched.hobbies ? errors.hobbies : ""}
+              </p>
+              <Button
+                component="label"
+                role={undefined}
+                variant="contained"
+                tabIndex={-1}
+                startIcon={<CloudUploadIcon />}
+              >
+                Upload files
+                <VisuallyHiddenInput
+                  name="profile"
+                  type="file"
+                  onChange={(event) => {
+                    let pimage = Array.from(event.target.files);
+                    console.log(pimage);
+
+                    setFieldValue("profile", pimage);
+                    setFieldTouched("profile", true, false);
+                  }}
+                  multiple
+                />
+              </Button>
+              <p className="error">
+                {errors.profile && touched.profile ? errors.profile : ""}
+              </p>
+
+              <div>
+                {values.profile?.map((v) => (
+                  <img src={URL.createObjectURL(v)} className="preview" />
+                ))}
+              </div>
+
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Country</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  name="country"
+                  value={values.country}
+                  label="country"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                >
+                  <MenuItem value={""}>Select Country</MenuItem>
+                  <MenuItem value={"India"}>India</MenuItem>
+                  <MenuItem value={"Vinland"}>Vinland</MenuItem>
+                </Select>
+              </FormControl>
+              <p className="error">
+                {errors.country && touched.country ? errors.country : ""}
+              </p>
             </form>
           </DialogContent>
           <DialogActions>
