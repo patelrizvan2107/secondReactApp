@@ -6,7 +6,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { number, object, string } from "yup";
+import { array, number, object, string } from "yup";
 import { useFormik } from "formik";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -73,10 +73,59 @@ function LearnYupFormik(props) {
       }),
     //   .min(10, "Atleast 10 Charecter")
     //   .max(100, "Only 100 Charecter Allowed."),
+    inputImg: string().required().test("inputImg", "Image only", (e,val) => {
+      //   console.log(val.length);
+
+      //   let arr = []
+      //   arr = val.split(".").toLowerCase();
+
+      //   console.log(arr,arr.length, arr[arr.length - 1]);
+
+
+      //   let imgType = ["jpg", "jpeg", "png", "webp"]
+      // console.log(!imgType.includes(arr[arr.length - 1].toLowerCase()));
+
+      //   if(val) {
+      //     if (!imgType.includes(arr[arr.length - 1])) {
+      //       return true
+      //   } else {
+      //       return false
+      //   }
+      //   } else {
+      //     return false
+      //   }
+
+    let file = e.target.files[0].
+      console.log("e", file.size);
+      console.log((val));
+      
+
+ console.log( val.split(".").pop());
+ const validExtensions = ["jpg", "jpeg", "png", "webp"];
+        const extension = val.split(".").pop();
+      if (!val) { return false } else {
+
+        if (!validExtensions.includes(extension)) {
+          return false;
+        } else   if(file.size > 1 * 1024 * 1024) {
+            return false;
+         } else {
+            return true;
+         }
+        
+        
+      };
+    }),
     gender: string().required("Select Gender"),
-    hobbies: string()
-      .test("hobbies", "Select Atleast two hobbies", (val) => {
+    hobbies: array()
+      .test("hobbies", "Select Atleast two hobbies", (e,val) => {
         console.log(val);
+        console.log(e.target.value);
+        if (val.length >= 2) {
+          return true;
+        } else {
+          return false;
+        }
       }),
   });
 
@@ -87,8 +136,9 @@ function LearnYupFormik(props) {
       number: "",
       bd: "",
       des: "",
+      inputImg: "",
       gender: "",
-      hobbies: "",
+      hobbies: [],
     },
     validationSchema: catSchema,
     onSubmit: (values) => {
@@ -181,6 +231,19 @@ function LearnYupFormik(props) {
                 onBlur={handleBlur}
                 helperText={errors.des && touched.des ? errors.des : ""}
               />
+              <input
+                error={errors.inputImg && touched.inputImg}
+                name="inputImg"
+                type="file"
+                accept="image/*"
+                onChange={handleChange}
+                onBlur={handleBlur}
+
+              />
+
+              <span>{
+                errors.inputImg && touched.inputImg ? errors.inputImg : ""
+              }</span>
               <FormControl>
                 <FormLabel id={`gende-label`}>Gender</FormLabel>
                 <RadioGroup
@@ -190,7 +253,7 @@ function LearnYupFormik(props) {
                   name="gender"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  //   value={gender}
+                //   value={gender}
                 >
                   <FormControlLabel
                     value="female"
@@ -216,8 +279,8 @@ function LearnYupFormik(props) {
                 name="hobbies"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                
-                
+
+
               >
                 <FormControlLabel
                   value={"Singing"}
