@@ -16,7 +16,7 @@ import EmpData from "./container/EmpData";
 import { Routes,Route } from "react-router";
 import Layout from "./components/Layout";
 import LearnYupFormik from "./container/LearnYupFormik/LearnYupFormik";
-import TextBox from "./container/TextBox"
+import TextBox from "./components/TextBox"
 import LearnYupFormik2 from "./container/LearnYupFormik/LearnYupFormik2";
 import TestToDo from "./container/testToDo";
 function App(props) {

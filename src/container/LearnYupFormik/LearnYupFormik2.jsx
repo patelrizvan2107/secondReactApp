@@ -1,14 +1,16 @@
 import { Form, Formik } from "formik";
 import React from "react";
-import TextBox from "../TextBox";
+import TextBox from "../../components/TextBox";
 import { object, string } from "yup";
+import RadioInput from "../../components/RadioInput";
 
 function LearnYupFormik2(props) {
   const demo = object({
     email: string().required(),
     firstName: string().required(),
     lastName: string().required(),
-    country: string().required()
+    country: string().required(),
+    gender: string().required(),
   });
 
   const countries = [
@@ -26,6 +28,7 @@ function LearnYupFormik2(props) {
           firstName: "",
           lastName: "",
           country: "",
+          gender: '',
         }}
         validationSchema={demo}
         onSubmit={(values, actions) => {
@@ -38,6 +41,8 @@ function LearnYupFormik2(props) {
           <TextBox name="lastName" type="text" label="Last Name" />
           <TextBox name="email" type="email" label="Email" />
           <TextBox name="country" dropDown = {countries}    select/>
+
+          <RadioInput  />
           <button type="submit">Submit</button>
         </Form>
       </Formik>
