@@ -16,7 +16,9 @@ import EmpData from "./container/EmpData";
 import { Routes,Route } from "react-router";
 import Layout from "./components/Layout";
 import LearnYupFormik from "./container/LearnYupFormik/LearnYupFormik";
-import TestToDo from "./container/TestToDo";
+import TextBox from "./container/TextBox"
+import LearnYupFormik2 from "./container/LearnYupFormik/LearnYupFormik2";
+import TestToDo from "./container/testToDo";
 function App(props) {
   return (
     // jsx
@@ -29,7 +31,9 @@ function App(props) {
         <Route path="/Emp" element = { <EmpData />}/>
         <Route path="learnyupformik" element = {<LearnYupFormik />}></Route>
         <Route path="/todo" element = {<TestToDo />}/>
+        <Route path="/learnyupformik2" element = {<LearnYupFormik2 />}/>
       </Routes>
+      
     
       {/* <Layout>
         

@@ -124,7 +124,6 @@ function LearnYupFormik(props) {
       number: "",
       bd: "",
       des: "",
-
       gender: "",
       hobbies: [],
       profile: [],
