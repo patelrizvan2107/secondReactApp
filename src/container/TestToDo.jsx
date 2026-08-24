@@ -8,42 +8,55 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-let tasks = [];
 function TestToDo(props) {
   const [task, setTask] = useState("");
-  // const [data, setData] = useState([])
-
+  const [data, setData] = useState([])
+  const [up, setUp] = useState(null);
   const handleData = (e) => {
     let obj = {
       id: crypto.randomUUID(),
       task,
     };
 
-    tasks.push(obj);
+    if (up !== null) {
+      let index = data.findIndex((v) => v.id === up);
 
-    // setData([...data, obj])
+      let edited = [...data];
+
+      edited[index] = obj;
+
+      setData(edited);
+
+       setUp(null);
+    } else {
+      setData([...data, obj]);
+    }
+    
     setTask("");
-// setData('');
-    // console.log(data);
   };
   const handleDel = (id) => {
     console.log("hii");
 
 
-    let index = tasks.findIndex((v) => v.id === id);
+    let index = data.findIndex((v) => v.id === id);
     console.log(index);
 
-    tasks.splice(index, 1);
+    let newData = [...data];  
+    newData.splice(index, 1);
 
-    console.log(tasks);
+    console.log(newData);
 
-    setTask("");
+    setData(newData);
+    setTask("")
   };
   const handleEdit = (id) => {
-    let EditTask = tasks.find((v) => v.id === id);
+    let EditTask = data.find((v) => v.id === id);
     console.log(EditTask.task);
 
-    setTask(" ");
+
+    setTask(EditTask.task);
+
+    setUp(id);
    
   };
 
@@ -58,7 +71,8 @@ function TestToDo(props) {
       >
         <TextField
           id="standard-basic"
-          label="Standard"
+          label="Enter Task"
+          value={task}
           variant="standard"
           onChange={(e) => setTask(e.target.value)}
         />
@@ -69,7 +83,7 @@ function TestToDo(props) {
 
       {
        
-tasks?.map((v) => (
+data?.map((v) => (
         <nav aria-label="secondary mailbox folders">
           <List>
             <ListItem disablePadding>

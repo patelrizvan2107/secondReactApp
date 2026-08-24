@@ -53,7 +53,7 @@ function EmpData() {
 
       setUp(null);
     } else {
-      const storedData = JSON.parse(localStorage.getItem("empData")) || [];
+      // const storedData = JSON.parse(localStorage.getItem("empData")) || [];
       const updatedData = [...data, dataObject];
 
       localStorage.setItem("empData", JSON.stringify(updatedData));
