@@ -6,7 +6,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 
-function RadioInput({ value, ...props }) {
+function RadioInput({ label, data, ...props }) {
   const [field, meta] = useField(props);
 
   console.log(field);
@@ -17,51 +17,22 @@ function RadioInput({ value, ...props }) {
   return (
     <div>
       <FormControl>
-        <FormLabel id={`1-label`}>Gender</FormLabel>
-        <RadioGroup
-          {...field}
-          error={meta.error && meta.touched}
-          value={value}
-          name="gender"
-        >
-          <FormControlLabel value="female" control={<Radio />} label="Female" />
-          <FormControlLabel value="male" control={<Radio />} label="Male" />
-          <FormControlLabel value="other" control={<Radio />} label="Other" />
+        <FormLabel id={`${label}-label`}>{label}</FormLabel>
+        <RadioGroup {...field} >
+          {data.map((v) => (
+            <FormControlLabel
+              value={v.value}
+              control={<Radio />}
+              label={v.lable}
+            />
+          ))}
         </RadioGroup>
-
-<<<<<<< HEAD
-        
       </FormControl>
-      <p>{meta.error && meta.touched ? meta.error : ""}</p>
+      <p style={{ color: "red"}}>
+        {meta.error && meta.touched ? meta.error : ""}
+      </p>
     </div>
   );
-=======
-    return (
-        <div>
-
-            <FormControl>
-                <FormLabel id={`1-label`}>Gender</FormLabel>
-                <RadioGroup
-                    {...field}
-                    error={meta.error && meta.touched}
-                    value={value}
-                    name='gender'
-
-                >
-                    <FormControlLabel value="female" control={<Radio />} label="Female" />
-                    <FormControlLabel value="male" control={<Radio />} label="Male" />
-                    <FormControlLabel value="other" control={<Radio />} label="Other" />
-
-                </RadioGroup>
-
-                <p>{ meta.error && meta.touched ? meta.error : ''
-}</p>
-
-            </FormControl>
-
-        </div>
-    );
->>>>>>> 899d0b7aaf9d60eed63ab6998374d20f38b7b395
 }
 
 export default RadioInput;

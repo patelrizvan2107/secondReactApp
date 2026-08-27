@@ -1,30 +1,51 @@
-import React from 'react';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import { useField } from 'formik';
-function CheckBox({ value, ...props }) {
-    const [field, meta] = useField(props);
-    console.log(props.name);
-    console.log(field);
-    console.log(meta);
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormGroup from "@mui/material/FormGroup";
+import { useField } from "formik";
+import React from "react";
 
+function CheckBoxInput({ label, data, ...props }) {
+  const [field, meta, helper] = useField(props);
+  const { setValue } = helper;
 
-    return (
-        <FormGroup
+  console.log(meta.error);
+  console.log(field);
+  
+  
+  return (
+    <div>
+      <h5>{label}</h5>
+      <FormGroup>
+        {data?.map((v) => (
+          <FormControlLabel
+            control={
+              <Checkbox
+                {...props}
+                value={v.value}
+                checked={field.value?.includes(v.value)}
+                onChange={(e) => {
+                  const { checked, value } = e.target;
+                  console.log(checked, value);
 
-            {...field}
-            name={props.name}
-            error={meta.error && meta.touched}
-
-        >
-            <FormControlLabel control={<Checkbox  value={"Coding"} />} label="Coding" />
-            <FormControlLabel control={<Checkbox />} label="Music" />
-            <FormControlLabel control={<Checkbox />} label="Reading" />
-
-            <p>{meta.error && meta.touched ? meta.error : ""}</p>
-        </FormGroup>
-    );
+                  if (checked) {
+                    setValue([...field.value || [], value]);
+                  } else {
+                    setValue((field.value || [])?.filter((v) => v !== value));
+                  }
+                }}
+              />
+            }
+            label={v.lable}
+          />
+        ))}
+        {
+          <p style={{ color: "red" }}>
+            {meta.error && meta.touched ? meta.error : ""}
+          </p>
+        }
+      </FormGroup>
+    </div>
+  );
 }
 
-export default CheckBox;
+export default CheckBoxInput;
