@@ -42,7 +42,7 @@ function LearnYupFormik2(props) {
           <TextBox name="email" type="email" label="Email" />
           <TextBox name="country" dropDown = {countries}    select/>
 
-          <RadioInput  />
+          <RadioInput name="gender" />
           <button type="submit">Submit</button>
         </Form>
       </Formik>
