@@ -19,6 +19,7 @@ import LearnYupFormik from "./container/LearnYupFormik/LearnYupFormik";
 import TextBox from "./components/TextBox"
 import LearnYupFormik2 from "./container/LearnYupFormik/LearnYupFormik2";
 import TestToDo from "./container/testToDo";
+import Grids from "./container/Grids";
 function App(props) {
   return (
     // jsx
@@ -32,6 +33,7 @@ function App(props) {
         <Route path="learnyupformik" element = {<LearnYupFormik />}></Route>
         <Route path="/todo" element = {<TestToDo />}/>
         <Route path="/learnyupformik2" element = {<LearnYupFormik2 />}/>
+        <Route path="/grids" element = {<Grids/>}/>
       </Routes>
       
     

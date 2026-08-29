@@ -29,13 +29,18 @@ function Header(props) {
             LearnYupFormik
           </Nav.Link>
         </Nav.Item>
-         <Nav.Item>
+        <Nav.Item>
           <Nav.Link eventKey="link-1" href="/todo">
             ToDo
           </Nav.Link>
-        </Nav.Item> <Nav.Item>
+        </Nav.Item>
+        <Nav.Item>
           <Nav.Link eventKey="link-1" href="/learnyupformik2">
             LearnYupFormik 2
+          </Nav.Link>
+        </Nav.Item><Nav.Item>
+          <Nav.Link eventKey="link-1" href="/grids">
+           Grid
           </Nav.Link>
         </Nav.Item>
       </Nav>
