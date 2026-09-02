@@ -13,6 +13,7 @@ import { BiTrash, BiEdit, BiUserPlus, BiMoon, BiSun } from "react-icons/bi";
 import { TiArrowSortedUp } from "react-icons/ti";
 import { TiArrowSortedDown } from "react-icons/ti";
 import Pagination from 'react-bootstrap/Pagination';
+import { useSelector } from "react-redux";
 
 function EmpData() {
   const [name, setName] = useState("");
@@ -24,6 +25,9 @@ function EmpData() {
   const [search, setSearch] = useState("");
   const [sortBy, setSortBy] = useState({ mode: null, by: "" });
   const [cp, setCp] = useState(1)
+
+    const counterValue = useSelector(state => state.counter); 
+
 
   useEffect(() => {
     let localeData = JSON.parse(localStorage.getItem("empData")) || [];
@@ -240,11 +244,13 @@ function EmpData() {
 
 
   return (
+  
     <div
       className={`min-vh-100 py-5 transition-all ${
         isDarkMode ? "bg-dark text-white" : "bg-light text-dark"
       }`}
     >
+      <h5>{counterValue.count}</h5>
       <Container className="max-w-lg">
         {/* Header Section */}
         <div className="d-flex justify-content-between align-items-center mb-4">

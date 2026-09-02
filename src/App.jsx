@@ -20,10 +20,13 @@ import TextBox from "./components/TextBox"
 import LearnYupFormik2 from "./container/LearnYupFormik/LearnYupFormik2";
 import TestToDo from "./container/testToDo";
 import Grids from "./container/Grids";
+import Counter2 from "./container/Counter2";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 function App(props) {
   return (
     // jsx
-    <div>
+    <Provider store={store}>
       <Header />
       <Routes>
         <Route path="/c" element={<Country />} />
@@ -34,6 +37,7 @@ function App(props) {
         <Route path="/todo" element = {<TestToDo />}/>
         <Route path="/learnyupformik2" element = {<LearnYupFormik2 />}/>
         <Route path="/grids" element = {<Grids/>}/>
+        <Route path="/counter2" element = {<Counter2/>}/>
       </Routes>
       
     
@@ -62,7 +66,7 @@ function App(props) {
       {/* <Products /> */}
 
       {/* <EmpData /> */}
-    </div>
+    </Provider >
   );
 }
 
