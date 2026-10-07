@@ -6,7 +6,7 @@ function Header(props) {
   return (
     <>
         <NavLink to={'/Emp'}>Employeee</NavLink>    
-        <NavLink to={'/counter2'}>Counter2</NavLink>    
+        <NavLink to={'/p'}>Products</NavLink>    
     </>
     // <div>
     //   <Nav variant="tabs" defaultActiveKey="/home">

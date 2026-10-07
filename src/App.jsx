@@ -30,7 +30,7 @@ function App(props) {
       <Header />
       <Routes>
         <Route path="/c" element={<Country />} />
-        <Route path="/p/:id" element={<Products />} />
+        <Route path="/p" element={<Products />} />
         <Route path="/t" element={<Timer />} />
         <Route path="/Emp" element = { <EmpData />}/>
         <Route path="learnyupformik" element = {<LearnYupFormik />}></Route>

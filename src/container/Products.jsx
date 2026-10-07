@@ -91,6 +91,10 @@ function Products(props) {
   
   let pages = Paginationed ()
 
+  const handleCart = (id) => {
+    console.log(id);
+    
+  }
   return (
     <section>
       <div className="container">
@@ -165,7 +169,7 @@ function Products(props) {
                           : v.title}
                       </Card.Title>
                       <Card.Text>{v.price}</Card.Text>
-                      <Button variant="primary">Add to Cart</Button>
+                      <Button variant="primary" onClick={() => handleCart(v.id)}>Add to Cart</Button>
                     </Card.Body>
                   </Card>
                 </div>
