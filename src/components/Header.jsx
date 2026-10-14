@@ -7,6 +7,7 @@ function Header(props) {
     <>
         <NavLink to={'/Emp'}>Employeee</NavLink>    
         <NavLink to={'/p'}>Products</NavLink>    
+        <NavLink to={'/learnyupformik'}>Formik</NavLink>
     </>
     // <div>
     //   <Nav variant="tabs" defaultActiveKey="/home">

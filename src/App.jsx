@@ -33,7 +33,7 @@ function App(props) {
         <Route path="/p" element={<Products />} />
         <Route path="/t" element={<Timer />} />
         <Route path="/Emp" element = { <EmpData />}/>
-        <Route path="learnyupformik" element = {<LearnYupFormik />}></Route>
+        <Route path="/learnyupformik" element = {<LearnYupFormik />}></Route>
         <Route path="/todo" element = {<TestToDo />}/>
         <Route path="/learnyupformik2" element = {<LearnYupFormik2 />}/>
         <Route path="/grids" element = {<Grids/>}/>
