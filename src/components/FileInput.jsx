@@ -1,5 +1,8 @@
 import Button from "@mui/material/Button";
 import { useField } from "formik";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { styled } from "@mui/material/styles";
+
 import React from "react";
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -8,13 +11,10 @@ const VisuallyHiddenInput = styled("input")({
   overflow: "hidden",
   position: "absolute",
   bottom: 0,
-  left: 10
-  ,
+  left: 10,
   whiteSpace: "nowrap",
   width: 1,
 });
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import { styled } from "@mui/material/styles";
 
 
 function FileInput({multiple, ...props}) {
@@ -45,7 +45,7 @@ function FileInput({multiple, ...props}) {
             let pimage = Array.from(event.target.files);
             console.log('asdfa',pimage);
 
-            setValue( pimage);
+            setValue(pimage);
             // setTouched( true, false);
           }}
           multiple = {multiple}
@@ -55,9 +55,9 @@ function FileInput({multiple, ...props}) {
         {meta.error && meta.touched ? meta.error : ""}
       </p>
 
-      <div>
+      <div style={{width: '80px', height: '80px'}}>
         {field.value?.map((v) => (
-          <img src={URL.createObjectURL(v)} className="preview" />
+          <img src={URL.createObjectURL(v)} />
         ))}
       </div>
     </>
