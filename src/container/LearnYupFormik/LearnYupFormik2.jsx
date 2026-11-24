@@ -21,14 +21,14 @@ function LearnYupFormik2(props) {
         console.log(val);
 
         const alwdTyp = ["image/png", "image/jpg", "image/jpeg", "image/webpg"];
-        console.log('asdc',val.map((v) => console.log(v.type)));
+        console.log('asdc', val.map((v) => console.log(v.type)));
 
         return val.every((v) => alwdTyp.includes(v.type));
       })
       .test("prifile", "Image must be less than 2 mb ", (val) => {
         return val.every((v) => v.size < 2 * 1024 * 1024);
       }),
-      active: boolean().oneOf([true],"Must be Active"),
+    active: boolean().oneOf([true], "Must be Active"),
   });
 
   const countries = [
@@ -76,7 +76,7 @@ function LearnYupFormik2(props) {
           <RadioInput name="gender" label="Gender" data={genderData} />
           <CheckBoxInput name="hobby" label={"Hobby"} data={hobbyData} />
           <FileInput name="image" multiple={true} />
-          <SwitchInput name = 'active' label = 'Active'/>
+          <SwitchInput name='active' label='Active' />
           <button type="submit">Submit</button>
         </Form>
       </Formik>
