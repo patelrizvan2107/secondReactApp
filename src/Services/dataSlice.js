@@ -5,17 +5,24 @@ export const dataSlice = createApi({
     reducerPath: "dataSlice",
     baseQuery: fetchBaseQuery({ baseUrl: "https://jsonplaceholder.typicode.com" }),
     endpoints: (builder) => ({
-        getPosts : builder.query({
+        getPosts: builder.query({
             query: () => "/posts"
         }),
-        createPost : builder.mutation({
+        createPost: builder.mutation({
             query: (post) => ({
                 url: "/posts",
                 method: "POST",
                 body: post
             })
-        })
+        }),
+        deletePost: builder.mutation({
+            query: (id) => ({
+                url: `/posts/${id}`,
+                method: "DELETE",
+            }),
+            invalidatesTags: (result, error, id) => [{ type: "Post", id }],
+        }),
     })
 })
 
-export const { useGetPostsQuery, useCreatePostMutation } = dataSlice
+export const { useGetPostsQuery, useCreatePostMutation, useDeletePostMutation } = dataSlice

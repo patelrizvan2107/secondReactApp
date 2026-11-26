@@ -5,7 +5,7 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 export const store = configureStore({
 
     reducer: {
-       [dataSlice.reducer]: dataSlice.reducer,
+       [dataSlice.reducerPath]: dataSlice.reducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(dataSlice.middleware)
 })
