@@ -22,7 +22,13 @@ export const dataSlice = createApi({
             }),
             invalidatesTags: (result, error, id) => [{ type: "Post", id }],
         }),
+        updatePost: builder.mutation({
+            query: (id) =>( {
+                url: `/posts/${id}`,
+                method: "PUT",
+            })
+        })
     })
 })
 
-export const { useGetPostsQuery, useCreatePostMutation, useDeletePostMutation } = dataSlice
+export const { useGetPostsQuery, useCreatePostMutation, useDeletePostMutation, useUpdatePostMutation } = dataSlice
